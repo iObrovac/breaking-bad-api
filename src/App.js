@@ -9,6 +9,7 @@ const App = () => {
   const [items, setItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [query, setQuery] = useState("");
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     const fetchItems = async () => {
@@ -23,11 +24,23 @@ const App = () => {
     fetchItems();
   }, [query]);
 
+  const filteredItems = items.filter((item) => {
+    const rec = search.toLowerCase();
+
+    return (
+      item.name.toLowerCase().includes(rec) ||
+      item.nickname.toLowerCase().includes(rec) ||
+      item.portrayed.toLowerCase().includes(rec)
+    );
+  });
+
+  console.log(items);
+
   return (
     <div className="container">
       <Header />
-      <Search getQuery={(q) => setQuery(q)} />
-      <CharacterGrid isLoading={isLoading} items={items} />
+      <Search getQuery={(q) => setSearch(q)} />
+      <CharacterGrid isLoading={isLoading} items={filteredItems} />
     </div>
   );
 };

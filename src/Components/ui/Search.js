@@ -14,7 +14,7 @@ const Search = ({ getQuery }) => {
         <input
           type="text"
           className="form-control"
-          placeholder="Search characters"
+          placeholder="Search characters actors and nicknames"
           value={text}
           onChange={(e) => onChange(e.target.value)}
           autoFocus
